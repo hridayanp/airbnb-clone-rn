@@ -1,6 +1,6 @@
 import { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { defaultStyles } from '@/constants/Styles';
 import { ListingGeo } from '@/interfaces/listingGeo';
 import { useRouter } from 'expo-router';
@@ -18,7 +18,7 @@ const initialRegion = {
   longitudeDelta: 0.0421,
 };
 
-const ListingsMap = ({ listings }: Props) => {
+const ListingsMap = memo(({ listings }: Props) => {
   const router = useRouter();
   const mapRef = useRef<any>(null);
 
@@ -119,7 +119,7 @@ const ListingsMap = ({ listings }: Props) => {
       </MapView>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

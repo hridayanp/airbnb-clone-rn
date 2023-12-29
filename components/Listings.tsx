@@ -15,15 +15,26 @@ import { Listing } from '@/interfaces/listing';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
+import {
+  BottomSheetFlatList,
+  BottomSheetFlatListMethods,
+} from '@gorhom/bottom-sheet';
 
 interface Props {
   listings: any[];
   category: string;
+  refresh?: number;
 }
 
-const Listings = ({ listings: items, category }: Props) => {
+const Listings = ({ listings: items, category, refresh }: Props) => {
   const [loading, setLoading] = useState(false);
-  const listRef = useRef<FlatList>(null);
+  const listRef = useRef<BottomSheetFlatListMethods>(null);
+
+  useEffect(() => {
+    if (refresh) {
+      listRef.current?.scrollToOffset({ offset: 0, animated: true });
+    }
+  }, [refresh]);
 
   useEffect(() => {
     setLoading(true);
@@ -77,10 +88,13 @@ const Listings = ({ listings: items, category }: Props) => {
 
   return (
     <View style={defaultStyles.container}>
-      <FlatList
+      <BottomSheetFlatList
         data={loading ? [] : items}
         ref={listRef}
         renderItem={renderRow}
+        ListHeaderComponent={
+          <Text style={styles.info}>{items.length} homes</Text>
+        }
       />
     </View>
   );
