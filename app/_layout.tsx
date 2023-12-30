@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import ModalHeaderText from '@/components/ModalHeaderText';
+import Colors from '@/constants/Colors';
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -115,9 +117,20 @@ function RootLayoutNav() {
           headerTitleStyle: {
             fontFamily: 'mon-sb',
           },
+          headerTransparent: true,
+          headerTitle: () => <ModalHeaderText />,
           presentation: 'transparentModal',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()}>
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{
+                backgroundColor: '#fff',
+                borderColor: Colors.grey,
+                borderRadius: 20,
+                borderWidth: 1,
+                padding: 2,
+              }}
+            >
               <Ionicons name="close-outline" size={24} color="black" />
             </TouchableOpacity>
           ),
