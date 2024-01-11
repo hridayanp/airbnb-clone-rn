@@ -44,6 +44,12 @@
         "projectId": "3e1c9fd3-fe0e-4266-86ee-240ade14d41c"
       }
     },
-    "owner": "hridayanp"
+    "owner": "hridayanp",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3e1c9fd3-fe0e-4266-86ee-240ade14d41c"
+    }
   }
 }
